@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sage-500: #6B9B76;
+  --color-sage-400: #8FBC8B;
+  --color-energy-peak: #22c55e;
+  --color-energy-normal: #3b82f6;
+  --color-energy-low: #ef4444;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Outfit', system-ui, sans-serif;
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-blob: blob 7s infinite;
+  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/85 backdrop-blur-md border border-slate-200/80 rounded-2xl p-6 shadow-sm transition-all duration-300 hover:border-sage-500/30 hover:shadow-lg;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-br from-sage-500 to-sage-400 text-white border-none rounded-lg py-3 px-6 font-semibold cursor-pointer transition-all duration-200 font-sans hover:-translate-y-0.5 hover:shadow-md hover:shadow-sage-500/40 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-slate-900 border border-slate-200 rounded-lg py-3 px-6 font-medium cursor-pointer transition-all duration-200 font-sans hover:bg-black/5 hover:border-slate-500;
+  }
+
+  .input-form {
+    @apply w-full bg-black/5 border border-slate-200 text-slate-900 rounded-lg py-3 px-4 font-sans transition-all duration-200 outline-none focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 placeholder:text-slate-400;
+  }
+}
