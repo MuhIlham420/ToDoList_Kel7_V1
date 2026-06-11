@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+const appBasePath = import.meta.env.BASE_URL || '/';
+
+const appPath = (path) => {
+  const base = appBasePath.endsWith('/') ? appBasePath.slice(0, -1) : appBasePath;
+  return `${base}${path}`;
+};
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api',
   headers: {
@@ -24,8 +31,8 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('token');
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
+      if (!window.location.pathname.endsWith('/login')) {
+        window.location.href = appPath('/login');
       }
     }
     return Promise.reject(error);
