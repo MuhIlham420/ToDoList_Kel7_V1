@@ -10,11 +10,11 @@ export default function ProfilSirkadianPage() {
   const [message, setMessage] = useState({ text: "", type: "" });
 
   const [formData, setFormData] = useState({
-    tipe_sirkadian: "normal",
-    jam_fokus_mulai: "09:00",
+    tipe_sirkadian: "pagi",
+    jam_fokus_mulai: "08:00",
     jam_fokus_selesai: "12:00",
     jam_tidur: "22:00",
-    jam_bangun: "05:00"
+    jam_bangun: "06:00"
   });
 
   useEffect(() => {
@@ -24,11 +24,11 @@ export default function ProfilSirkadianPage() {
         if (response.data.success && response.data.data.profil_sirkadian) {
           const p = response.data.data.profil_sirkadian;
           setFormData({
-            tipe_sirkadian: p.tipe_sirkadian || "normal",
-            jam_fokus_mulai: (p.jam_fokus_mulai || "09:00").substring(0, 5),
+            tipe_sirkadian: p.tipe_sirkadian || "pagi",
+            jam_fokus_mulai: (p.jam_fokus_mulai || "08:00").substring(0, 5),
             jam_fokus_selesai: (p.jam_fokus_selesai || "12:00").substring(0, 5),
             jam_tidur: (p.jam_tidur || "22:00").substring(0, 5),
-            jam_bangun: (p.jam_bangun || "05:00").substring(0, 5)
+            jam_bangun: (p.jam_bangun || "06:00").substring(0, 5)
           });
         }
       } catch (err) {
@@ -101,9 +101,9 @@ export default function ProfilSirkadianPage() {
                 onChange={handleChange}
                 className="input-form cursor-pointer"
               >
-                <option value="early_bird">Early Bird (Pagi)</option>
-                <option value="normal">Day Owl (Siang/Sore)</option>
-                <option value="night_owl">Night Owl (Malam/Dini Hari)</option>
+                <option value="pagi">Early Bird (Pagi)</option>
+                <option value="siang">Day Owl (Siang/Sore)</option>
+                <option value="malam">Night Owl (Malam/Dini Hari)</option>
               </select>
               <p className="text-sm text-slate-500 mt-2">Pilih kecenderungan alami tubuh Anda untuk merasa berenergi.</p>
             </div>

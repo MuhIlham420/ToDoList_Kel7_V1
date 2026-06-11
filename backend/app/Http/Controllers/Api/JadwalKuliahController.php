@@ -18,7 +18,17 @@ class JadwalKuliahController extends Controller
     public function index(Request $request): JsonResponse
     {
         $jadwal = $request->user()->jadwalKuliah()
-            ->orderByRaw("FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu')")
+            ->orderByRaw("
+                CASE hari
+                    WHEN 'Senin' THEN 1
+                    WHEN 'Selasa' THEN 2
+                    WHEN 'Rabu' THEN 3
+                    WHEN 'Kamis' THEN 4
+                    WHEN 'Jumat' THEN 5
+                    WHEN 'Sabtu' THEN 6
+                    ELSE 7
+                END
+            ")
             ->orderBy('jam_mulai', 'asc')
             ->get();
 
